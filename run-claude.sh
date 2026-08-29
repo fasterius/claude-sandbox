@@ -13,5 +13,5 @@ mkdir -p "$HOME/.claude-sandbox-home"
 # Make sure proxy is running
 docker compose up -d proxy
 
-# Run Claude interactively
-docker compose run --rm claude claude
+# Run Claude interactively, forwarding any extra args
+docker compose run --rm claude claude "$@"
