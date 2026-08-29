@@ -1,0 +1,51 @@
+services:
+  proxy:
+    image: kalaksi/tinyproxy:latest
+    container_name: claude-proxy
+    restart: unless-stopped
+    volumes:
+      - ./tinyproxy.conf:/etc/tinyproxy/tinyproxy.conf:ro
+      - ./filter:/etc/tinyproxy/filter:ro
+    networks:
+      - claude-net
+      - proxy-egress
+    # Hardening
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+
+  claude:
+    build: .
+    image: claude-sandbox:latest
+    container_name: claude
+    # Interactivity
+    stdin_open: true
+    tty: true
+    environment:
+      HTTPS_PROXY: http://proxy:8888
+      HTTP_PROXY: http://proxy:8888
+      NO_PROXY: localhost,127.0.0.1
+    volumes:
+      # The `PROJECT_DIR` env variable is set in the helper script
+      - ${PROJECT_DIR:?PROJECT_DIR must be set}:/home/dev/workspace
+      # Mount `.claude` and `.claude.json` into the container's home directory
+      - ./state:/home/dev
+    networks:
+      - claude-net
+    depends_on:
+      - proxy
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 4g
+    cpus: 2
+    pids_limit: 512
+
+networks:
+  claude-net:
+    driver: bridge
+    internal: true
+  proxy-egress:
+    driver: bridge
