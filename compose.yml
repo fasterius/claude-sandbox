@@ -30,7 +30,7 @@ services:
       # The `PROJECT_DIR` env variable is set in the helper script
       - ${PROJECT_DIR:?PROJECT_DIR must be set}:/home/dev/workspace
       # Mount `.claude` and `.claude.json` into the container's home directory
-      - ./state:/home/dev
+      - ${HOME}/.claude-sandbox-home:/home/dev
     networks:
       - claude-net
     depends_on:
