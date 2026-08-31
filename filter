@@ -1,2 +1,7 @@
 ^api\.anthropic\.com$
 ^platform\.claude\.com$
+
+^prefix\.dev$
+^.*\.prefix\.dev$
+^conda\.anaconda\.org$
+^.*\.anaconda\.org$

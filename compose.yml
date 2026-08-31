@@ -16,7 +16,10 @@ services:
       - no-new-privileges:true
 
   claude:
-    build: .
+    build:
+      context: .
+      platforms:
+        - linux/amd64
     image: claude-sandbox:latest
     container_name: claude
     # Interactivity
