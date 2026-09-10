@@ -8,3 +8,6 @@
 
 ^registry\.nextflow\.io$
 ^public-cr-prod\.seqera\.io$
+
+^bioconductor\.org$
+^contributions\.bioconductor\.org$
