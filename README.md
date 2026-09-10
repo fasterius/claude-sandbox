@@ -49,4 +49,4 @@ been stored in the `~/.claude-sandbox-home` directory.
 ## Extending the allow-list
 
 Add an anchored regular expression line to `filter` (e.g. `^some\.host\.com$`)
-and restart.
+and restart using the `restart-proxy.sh` script.
