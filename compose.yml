@@ -1,7 +1,6 @@
 services:
   proxy:
     image: kalaksi/tinyproxy:latest
-    container_name: claude-proxy
     restart: unless-stopped
     volumes:
       - ./tinyproxy.conf:/etc/tinyproxy/tinyproxy.conf:ro
@@ -21,7 +20,6 @@ services:
       platforms:
         - linux/amd64
     image: claude-sandbox:latest
-    container_name: claude
     # Interactivity
     stdin_open: true
     tty: true

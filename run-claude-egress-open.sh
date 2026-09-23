@@ -13,9 +13,12 @@ mkdir -p "$CLAUDE_HOME"
 # Use the current directory as the project
 export PROJECT_DIR="$PWD"
 
-# Set COMPOSE_FILE environment variable, used by `docker compose`
+# Set COMPOSE_FILE and COMPOSE_PROJECT_NAME, used by `docker compose`; the
+# project name must differ from the egress-filtered mode's so they get
+# separate networks/containers instead of clashing over shared ones
 SANDBOX_DIR="$(dirname "$0")"
 export COMPOSE_FILE="$SANDBOX_DIR/compose.yml:$SANDBOX_DIR/compose-egress-open.yml"
+export COMPOSE_PROJECT_NAME="claude-sandbox-egress-open"
 
 # Run Claude interactively, forwarding any extra args; skip the proxy using
 # `--no-deps` 
