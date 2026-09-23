@@ -4,10 +4,13 @@ FROM node:22-bookworm-slim
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
+        build-essential \
         ca-certificates \
+        curl \
         fd-find \
         git \
         ripgrep \
+        wget \
     && rm -rf /var/lib/apt/lists/* \
     # Symlink `fdfind` (default on Debian) into `fd`
     && ln -s /usr/bin/fdfind /usr/local/bin/fd
