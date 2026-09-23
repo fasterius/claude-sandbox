@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Make sure the external home directory exists
-mkdir -p "$HOME/.claude-sandbox-home"
+# Use a dedicated external home directory and make sure it exists
+export CLAUDE_HOME="$HOME/.claude-sandbox-home-egress-filtered"
+mkdir -p "$CLAUDE_HOME"
 
 # Use the current directory as the project
 export PROJECT_DIR="$PWD"
