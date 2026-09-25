@@ -18,7 +18,16 @@ locked down to only the endpoints at Anthropic.
 
 ## Usage
 
-```sh
+First build the images using `Docker compose` (the environment variables are not
+used during build but are required, so initialise them to the current directory):
+
+```bash
+PROJECT_DIR=. CLAUDE_HOME=. docker compose build
+```
+
+You can then run Claude Code with egress filtering like so:
+
+```bash
 cd /path/to/your/project
 /path/to/this/repo/run-claude-egress-filtered.sh [optional args]
 ```
@@ -27,7 +36,7 @@ The `run-claude-egress-filtered.sh` script can be run from any directory: it
 uses `$PWD` as the project to mount. Any extra arguments are forwarded to the
 `claude` CLI, _e.g._:
 
-```sh
+```bash
 run-claude-egress-filtered.sh -p "summarise this repository"
 ```
 
@@ -62,7 +71,7 @@ and restart using the `restart-proxy.sh` script.
 It is also possible to run this setup with no egress limits, just execute
 `run-claude-egress-open.sh` instead of `run-claude-egress-filtered.sh`:
 
-```sh
+```bash
 cd /path/to/your/project
 /path/to/this/repo/run-claude-egress-open.sh [optional args]
 ```
